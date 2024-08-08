@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/RegalEquineOasis.iml" filepath="$PROJECT_DIR$/.idea/RegalEquineOasis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/horse-service/horse-service.iml" filepath="$PROJECT_DIR$/backend/horse-service/horse-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/reo.iml" filepath="$PROJECT_DIR$/backend/reo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/rider-serivce/rider-serivce.iml" filepath="$PROJECT_DIR$/backend/rider-serivce/rider-serivce.iml" />
+    </modules>
+  </component>
+</project>
