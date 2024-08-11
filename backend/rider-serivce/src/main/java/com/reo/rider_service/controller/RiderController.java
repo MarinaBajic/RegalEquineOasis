@@ -1,9 +1,12 @@
 package com.reo.rider_service.controller;
 
+import com.reo.rider_service.dto.RiderRequest;
 import com.reo.rider_service.dto.RiderResponse;
 import com.reo.rider_service.service.RiderService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +14,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/riders")
+@Validated
 public class RiderController {
 
     private RiderService riderService;
@@ -21,9 +25,9 @@ public class RiderController {
         return riderService.getAll();
     }
 
-//    @PostMapping
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public void addNewRider(@RequestBody RiderRequest riderRequest) {
-//        riderService.addNewRider(riderRequest);
-//    }
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addNew(@RequestBody @Valid RiderRequest riderRequest) {
+        riderService.add(riderRequest);
+    }
 }

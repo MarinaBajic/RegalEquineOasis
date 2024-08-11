@@ -1,22 +1,26 @@
 package com.reo.rider_service.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
-public class RiderResponse {
-    private Long id;
+public class RiderRequest {
+    @NotNull(message = "Name must be provided.")
     private String name;
+
+    @NotNull(message = "Surname must be provided.")
     private String surname;
+
     private String address;
     private LocalDate dateOfBirth;
     private LocalDate dateOfEnrollment;
-    private String coachName;
+
+    @NotNull(message = "Id of coach must be provided.")
+    private Long idCoach;
 }

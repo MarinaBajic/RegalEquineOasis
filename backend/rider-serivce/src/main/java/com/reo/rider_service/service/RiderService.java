@@ -1,8 +1,12 @@
 package com.reo.rider_service.service;
 
+import com.reo.rider_service.dto.RiderRequest;
 import com.reo.rider_service.dto.RiderResponse;
+import com.reo.rider_service.exception.EntityDoesNotExistException;
 import com.reo.rider_service.mapper.RiderMapper;
+import com.reo.rider_service.model.Coach;
 import com.reo.rider_service.model.Rider;
+import com.reo.rider_service.repository.CoachRepository;
 import com.reo.rider_service.repository.RiderRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,49 +20,28 @@ import java.util.List;
 public class RiderService {
 
     private RiderRepository riderRepository;
+    private CoachRepository coachRepository;
 
     private RiderMapper riderMapper;
-
-//    @Autowired
-//    private CoachRepository coachRepository;
 
     public List<RiderResponse> getAll() {
         List<Rider> riders = riderRepository.findAll();
         return riderMapper.mapToResponseList(riders);
     }
 
-//    private RiderResponse mapToRiderResponse(Rider rider) {
-//        return RiderResponse.builder()
-//                .idRider(rider.getIdRider())
-//                .address(rider.getAddress())
-//                .dateOfBirth(rider.getDateOfBirth())
-//                .dateOfEnrollment(rider.getDateOfEnrollment())
-//                .name(rider.getName())
-//                .surname(rider.getSurname())
-//                .coachName(rider.getCoach().getName() + " " + rider.getCoach().getSurname())
-//                .build();
-//    }
+    public void add(RiderRequest riderRequest) {
+        Coach coach = coachRepository.findById(riderRequest.getIdCoach())
+                .orElseThrow(() -> new EntityDoesNotExistException("Coach with id: " + riderRequest.getIdCoach() + " does not exist.", riderRequest.getIdCoach()));
 
-//    public void addNewRider(RiderRequest riderRequest) {
-//        Optional<Coach> defaultCoachOptional = coachRepository.findByNameAndSurname("Marina", "Bajic");
-//        Coach defaultCoach;
-//        if (defaultCoachOptional.isEmpty()) {
-//            defaultCoach = Coach.builder().name("Marina").surname("Bajic").build();
-//            coachRepository.save(defaultCoach);
-//        }
-//        else
-//            defaultCoach = defaultCoachOptional.get();
-//
-//        Rider rider = Rider.builder()
-//                .address(riderRequest.getAddress())
-//                .dateOfBirth(riderRequest.getDateOfBirth())
-//                .dateOfEnrollment(riderRequest.getDateOfEnrollment())
-//                .name(riderRequest.getName())
-//                .surname(riderRequest.getSurname())
-//                .coach(coachRepository.findById(riderRequest.getIdCoach()).orElse(defaultCoach))
-//                .build();
-//
-//        riderRepository.save(rider);
-//        log.info("Rider with id: {} is saved", rider.getIdRider());
-//    }
+        Rider rider = new Rider();
+        rider.setAddress(riderRequest.getAddress());
+        rider.setDateOfBirth(riderRequest.getDateOfBirth());
+        rider.setDateOfEnrollment(riderRequest.getDateOfEnrollment());
+        rider.setName(riderRequest.getName());
+        rider.setSurname(riderRequest.getSurname());
+        rider.setCoach(coach);
+
+        riderRepository.save(rider);
+        log.info("Rider with id: {} is saved", rider.getId());
+    }
 }
