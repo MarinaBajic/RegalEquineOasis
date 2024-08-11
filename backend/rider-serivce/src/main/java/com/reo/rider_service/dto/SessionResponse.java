@@ -16,6 +16,6 @@ public class SessionResponse {
     private LocalDate date;
     private String description;
     private String time;
-    private String riderName;
+    private RiderResponse rider;
     private String horseFullName;
 }

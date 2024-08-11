@@ -14,6 +14,7 @@ import java.util.List;
 public class SessionMapper {
 
     private HorseClient horseClient;
+    private RiderMapper riderMapper;
 
     public SessionResponse mapToResponse(Session session) {
         HorseResponse horse = horseClient.getById(session.getHorseId()).getBody();
@@ -23,7 +24,7 @@ public class SessionMapper {
                 .date(session.getDate())
                 .description(session.getDescription())
                 .time(session.getTime())
-                .riderName(session.getRider().getName() + " " + session.getRider().getSurname())
+                .rider(riderMapper.mapToResponse(session.getRider()))
                 .horseFullName(horse != null ? horse.getFullName() : null)
                 .build();
     }

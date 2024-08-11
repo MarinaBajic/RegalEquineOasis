@@ -5,18 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RiderResponse {
-    private Long id;
+public class CoachDto {
     private String name;
     private String surname;
-    private String address;
-    private LocalDate dateOfBirth;
-    private LocalDate dateOfEnrollment;
-    private CoachDto coach;
+    private Integer yearsOfExperience;
 }

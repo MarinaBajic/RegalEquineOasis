@@ -2,12 +2,16 @@ package com.reo.rider_service.mapper;
 
 import com.reo.rider_service.dto.RiderResponse;
 import com.reo.rider_service.model.Rider;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@AllArgsConstructor
 public class RiderMapper {
+
+    private CoachMapper coachMapper;
 
     public RiderResponse mapToResponse(Rider rider) {
         return RiderResponse.builder()
@@ -17,7 +21,7 @@ public class RiderMapper {
                 .dateOfEnrollment(rider.getDateOfEnrollment())
                 .name(rider.getName())
                 .surname(rider.getSurname())
-                .coachName(rider.getCoach().getName() + " " + rider.getCoach().getSurname())
+                .coach(coachMapper.mapToDto(rider.getCoach()))
                 .build();
     }
 
