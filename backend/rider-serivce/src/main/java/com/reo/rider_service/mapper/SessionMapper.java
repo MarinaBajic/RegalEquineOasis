@@ -25,7 +25,7 @@ public class SessionMapper {
                 .description(session.getDescription())
                 .time(session.getTime())
                 .rider(riderMapper.mapToResponse(session.getRider()))
-                .horseFullName(horse != null ? horse.getFullName() : null)
+                .horse(horse)
                 .build();
     }
 

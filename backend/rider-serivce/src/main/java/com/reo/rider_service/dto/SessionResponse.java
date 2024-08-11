@@ -17,5 +17,5 @@ public class SessionResponse {
     private String description;
     private String time;
     private RiderResponse rider;
-    private String horseFullName;
+    private HorseResponse horse;
 }
