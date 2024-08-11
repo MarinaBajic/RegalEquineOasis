@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CoachDto {
+public class CoachResponse {
     private String name;
     private String surname;
     private Integer yearsOfExperience;

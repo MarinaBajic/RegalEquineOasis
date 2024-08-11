@@ -18,5 +18,5 @@ public class RiderResponse {
     private String address;
     private LocalDate dateOfBirth;
     private LocalDate dateOfEnrollment;
-    private CoachDto coach;
+    private CoachResponse coach;
 }

@@ -21,7 +21,7 @@ public class RiderMapper {
                 .dateOfEnrollment(rider.getDateOfEnrollment())
                 .name(rider.getName())
                 .surname(rider.getSurname())
-                .coach(coachMapper.mapToDto(rider.getCoach()))
+                .coach(coachMapper.mapToResponse(rider.getCoach()))
                 .build();
     }
 

@@ -20,7 +20,7 @@ public class HorseMapper {
                 .fullName(horse.getFullName())
                 .gender(horse.getGender())
                 .nickname(horse.getNickname())
-                .breed(breedMapper.mapToDto(horse.getBreed()))
+                .breed(breedMapper.mapToResponse(horse.getBreed()))
                 .build();
     }
 
