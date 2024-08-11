@@ -19,7 +19,7 @@ public class Session {
     private Rider rider;
 
     @Column(name = "horse_id")
-    private Long horseId;
+    private Long idHorse;
 
     private LocalDate date;
     private String time;
