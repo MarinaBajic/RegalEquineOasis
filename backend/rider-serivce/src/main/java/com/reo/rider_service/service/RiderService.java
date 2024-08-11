@@ -29,6 +29,12 @@ public class RiderService {
         return riderMapper.mapToResponseList(riders);
     }
 
+    public RiderResponse getById(Long id) {
+        Rider rider = riderRepository.findById(id)
+                .orElseThrow(() -> new EntityDoesNotExistException("Rider with id: " + id + " not found.", id));
+        return riderMapper.mapToResponse(rider);
+    }
+
     public void add(RiderRequest riderRequest) {
         Coach coach = coachRepository.findById(riderRequest.getIdCoach())
                 .orElseThrow(() -> new EntityDoesNotExistException("Coach with id: " + riderRequest.getIdCoach() + " does not exist.", riderRequest.getIdCoach()));
