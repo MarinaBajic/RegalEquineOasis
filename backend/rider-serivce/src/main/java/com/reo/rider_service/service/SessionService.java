@@ -2,6 +2,7 @@ package com.reo.rider_service.service;
 
 import com.reo.rider_service.dto.*;
 import com.reo.rider_service.exception.EntityDoesNotExistException;
+import com.reo.rider_service.exception.UnableToAddNewEntityException;
 import com.reo.rider_service.feign.HorseClient;
 import com.reo.rider_service.mapper.SessionMapper;
 import com.reo.rider_service.model.Rider;
@@ -15,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -45,6 +47,10 @@ public class SessionService {
         } catch (FeignException e) {
             throw new EntityDoesNotExistException("Horse with id: " + sessionRequest.getIdHorse() + " does not exist.", sessionRequest.getIdHorse());
         }
+
+        Optional<Session> horseTaken = sessionRepository.findByIdHorseAndDateAndTime(horse != null ? horse.getId() : null, sessionRequest.getDate(), sessionRequest.getTime());
+        if (horseTaken.isPresent())
+            throw new UnableToAddNewEntityException("Horse with id: " + (horse != null ? horse.getId() : null) + " is not available for selected date and time. Please choose another.");
 
         Session session = new Session();
         session.setDate(sessionRequest.getDate());

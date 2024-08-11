@@ -19,6 +19,12 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
         return new ResponseEntity<>(errorEntity, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(UnableToAddNewEntityException.class)
+    public ResponseEntity<ErrorEntity> handleUnableToAddNewEntity(UnableToAddNewEntityException ex) {
+        ErrorEntity errorEntity = new ErrorEntity(ex.getMessage(), -1L);
+        return new ResponseEntity<>(errorEntity, HttpStatus.BAD_REQUEST);
+    }
+
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
