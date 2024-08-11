@@ -12,6 +12,6 @@ INSERT INTO Rider (name, surname, address, date_of_birth, date_of_enrollment, co
 
 -- Populate Session table
 INSERT INTO Session (rider_id, horse_id, date, time, description) VALUES
-(1, 1, '2024-08-01', '10:00', 'Morning training session with Champion Stallion'),
-(2, 2, '2024-08-03', '15:00', 'Afternoon ride with Desert Beauty'),
-(3, 3, '2024-08-05', '09:30', 'Early session with Lightning Bolt');
+(1, 1, '2024-08-01', '10:00', 'Morning training'),
+(2, 2, '2024-08-03', '15:00', 'Afternoon ride'),
+(3, 3, '2024-08-05', '09:30', 'Early session');
