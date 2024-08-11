@@ -4,11 +4,13 @@ import com.reo.horse_service.dto.HorseRequest;
 import com.reo.horse_service.dto.HorseResponse;
 import com.reo.horse_service.exception.EntityAlreadyExistsException;
 import com.reo.horse_service.exception.EntityDoesNotExistException;
+import com.reo.horse_service.feign.SessionClient;
 import com.reo.horse_service.mapper.HorseMapper;
 import com.reo.horse_service.model.Breed;
 import com.reo.horse_service.model.Horse;
 import com.reo.horse_service.repository.BreedRepository;
 import com.reo.horse_service.repository.HorseRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,7 @@ public class HorseService {
 
     private HorseRepository horseRepository;
     private BreedRepository breedRepository;
-
+    private SessionClient sessionClient;
     private HorseMapper horseMapper;
 
     public List<HorseResponse> getAll() {
@@ -57,16 +59,12 @@ public class HorseService {
         log.info("Horse with id: {} is saved.", horse.getId());
     }
 
+    @Transactional
     public void delete(Long id) {
         Horse horse = horseRepository.findById(id)
                 .orElseThrow(() -> new EntityDoesNotExistException("Horse with id: '" + id + "' does not exist in the DB.", id));
 
-        //TODO
-//        List<Session> sessions = sessionRepository.findAllByHorse(horse);
-//        for (Session s : sessions) {
-//            sessionRepository.delete(s);
-//        }
-
+        sessionClient.deleteByIdHorse(horse.getId());
         horseRepository.delete(horse);
         log.info("Horse with id: {} successfully deleted.", id);
     }

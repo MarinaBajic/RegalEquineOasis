@@ -21,7 +21,6 @@ public class RiderService {
 
     private RiderRepository riderRepository;
     private CoachRepository coachRepository;
-
     private RiderMapper riderMapper;
 
     public List<RiderResponse> getAll() {

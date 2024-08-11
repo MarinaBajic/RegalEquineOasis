@@ -40,4 +40,10 @@ public class SessionController {
     public void add(@RequestBody @Valid SessionRequest sessionRequest) {
         sessionService.add(sessionRequest);
     }
+
+    @DeleteMapping("/delete")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteByIdHorse(@RequestParam("id-horse") Long id) {
+        sessionService.deleteByIdHorse(id);
+    }
 }

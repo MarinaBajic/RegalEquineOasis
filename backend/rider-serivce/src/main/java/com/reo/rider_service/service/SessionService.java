@@ -9,6 +9,7 @@ import com.reo.rider_service.model.Session;
 import com.reo.rider_service.repository.RiderRepository;
 import com.reo.rider_service.repository.SessionRepository;
 import feign.FeignException;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,6 @@ public class SessionService {
     private SessionRepository sessionRepository;
     private RiderRepository riderRepository;
     private HorseClient horseClient;
-
     private SessionMapper sessionMapper;
 
     public List<SessionResponse> getAll() {
@@ -32,14 +32,12 @@ public class SessionService {
     }
 
     public SessionResponse getById(Long id) {
-        Session session = sessionRepository.findById(id)
-                .orElseThrow(() -> new EntityDoesNotExistException("Session with id: " + id + " not found.", id));
+        Session session = sessionRepository.findById(id).orElseThrow(() -> new EntityDoesNotExistException("Session with id: " + id + " not found.", id));
         return sessionMapper.mapToResponse(session);
     }
 
     public void add(SessionRequest sessionRequest) {
-        Rider rider = riderRepository.findById(sessionRequest.getIdRider())
-                .orElseThrow(() -> new EntityDoesNotExistException("Rider with id: " + sessionRequest.getIdRider() + " does not exist.", sessionRequest.getIdRider()));
+        Rider rider = riderRepository.findById(sessionRequest.getIdRider()).orElseThrow(() -> new EntityDoesNotExistException("Rider with id: " + sessionRequest.getIdRider() + " does not exist.", sessionRequest.getIdRider()));
 
         HorseResponse horse;
         try {
@@ -57,5 +55,10 @@ public class SessionService {
 
         sessionRepository.save(session);
         log.info("Session with id: {} is saved", session.getId());
+    }
+
+    @Transactional
+    public void deleteByIdHorse(Long id) {
+        sessionRepository.deleteByIdHorse(id);
     }
 }
