@@ -38,9 +38,9 @@ public class HorseService {
     }
 
     public void add(HorseRequest horseRequest) {
-        Optional<Horse> horseExists = horseRepository.findByFullName(horseRequest.getFullName());
-        if (horseExists.isPresent()) {
-            throw new EntityAlreadyExistsException("Horse with full name: '" + horseRequest.getFullName() + "' already exists in the DB.", horseExists.get().getId());
+        Optional<Horse> horseOptional = horseRepository.findByFullName(horseRequest.getFullName());
+        if (horseOptional.isPresent()) {
+            throw new EntityAlreadyExistsException("Horse with full name: '" + horseRequest.getFullName() + "' already exists in the DB.", horseOptional.get().getId());
         }
 
         Breed breed = breedRepository.findById(horseRequest.getIdBreed())
