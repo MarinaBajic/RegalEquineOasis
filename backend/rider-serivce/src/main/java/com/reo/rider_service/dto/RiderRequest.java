@@ -1,5 +1,6 @@
 package com.reo.rider_service.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,10 +12,10 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 public class RiderRequest {
-    @NotNull(message = "Name must be provided.")
+    @NotBlank(message = "Name must be provided.")
     private String name;
 
-    @NotNull(message = "Surname must be provided.")
+    @NotBlank(message = "Surname must be provided.")
     private String surname;
 
     private String address;
