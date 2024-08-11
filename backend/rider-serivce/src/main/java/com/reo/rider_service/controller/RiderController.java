@@ -27,7 +27,7 @@ public class RiderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addNew(@RequestBody @Valid RiderRequest riderRequest) {
+    public void add(@RequestBody @Valid RiderRequest riderRequest) {
         riderService.add(riderRequest);
     }
 }
