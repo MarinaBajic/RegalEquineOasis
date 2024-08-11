@@ -4,7 +4,7 @@ import com.reo.horse_service.dto.HorseRequest;
 import com.reo.horse_service.dto.HorseResponse;
 import com.reo.horse_service.exception.EntityAlreadyExistsException;
 import com.reo.horse_service.exception.EntityDoesNotExistException;
-import com.reo.horse_service.mappers.HorseMapper;
+import com.reo.horse_service.mapper.HorseMapper;
 import com.reo.horse_service.model.Breed;
 import com.reo.horse_service.model.Horse;
 import com.reo.horse_service.repository.BreedRepository;

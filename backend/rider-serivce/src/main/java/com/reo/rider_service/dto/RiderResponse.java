@@ -1,4 +1,4 @@
-package com.reo.horse_service.dto;
+package com.reo.rider_service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,11 +11,12 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class HorseResponse {
+public class RiderResponse {
     private Long id;
+    private String address;
     private LocalDate dateOfBirth;
-    private String fullName;
-    private String gender;
-    private String nickname;
-    private String breedName;
+    private LocalDate dateOfEnrollment;
+    private String name;
+    private String surname;
+    private String coachName;
 }

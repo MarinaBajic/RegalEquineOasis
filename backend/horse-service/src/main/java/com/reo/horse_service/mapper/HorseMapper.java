@@ -1,4 +1,4 @@
-package com.reo.horse_service.mappers;
+package com.reo.horse_service.mapper;
 
 import com.reo.horse_service.dto.HorseResponse;
 import com.reo.horse_service.model.Horse;
@@ -11,7 +11,7 @@ public class HorseMapper {
 
     public HorseResponse mapToResponse(Horse horse) {
         return HorseResponse.builder()
-                .idHorse(horse.getId())
+                .id(horse.getId())
                 .dateOfBirth(horse.getDateOfBirth())
                 .fullName(horse.getFullName())
                 .gender(horse.getGender())
