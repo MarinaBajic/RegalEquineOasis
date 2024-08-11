@@ -15,3 +15,11 @@ INSERT INTO Session (rider_id, horse_id, date, time, description) VALUES
 (1, 1, '2024-08-01', '10:00', 'Morning training'),
 (2, 2, '2024-08-03', '15:00', 'Afternoon ride'),
 (3, 3, '2024-08-05', '09:30', 'Early session');
+
+-- Populate Favorite table
+INSERT INTO Favorite (rider_id, id_horse) VALUES
+(1, 1),
+(1, 2),
+(2, 3),
+(3, 1),
+(3, 2);

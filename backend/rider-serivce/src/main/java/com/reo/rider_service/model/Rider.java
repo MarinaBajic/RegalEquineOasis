@@ -28,6 +28,6 @@ public class Rider {
     @OneToMany(mappedBy = "rider")
     private List<Session> sessions;
 
-//    @OneToMany(mappedBy = "rider")
-//    private List<Favorite> favorites;
+    @OneToMany(mappedBy = "rider")
+    private List<Favorite> favorites;
 }
