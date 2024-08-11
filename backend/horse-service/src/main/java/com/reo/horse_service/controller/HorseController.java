@@ -2,8 +2,8 @@ package com.reo.horse_service.controller;
 
 import com.reo.horse_service.dto.HorseRequest;
 import com.reo.horse_service.dto.HorseResponse;
-import com.reo.horse_service.exception.EntityDoesNotExistException;
 import com.reo.horse_service.service.HorseService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,7 +32,7 @@ public class HorseController {
         try {
             HorseResponse horseResponse = horseService.getById(id);
             return ResponseEntity.ok(horseResponse);
-        } catch (EntityDoesNotExistException e) {
+        } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
