@@ -35,8 +35,8 @@ public class RiderService {
     }
 
     public void add(RiderRequest riderRequest) {
-        Coach coach = coachRepository.findById(riderRequest.getIdCoach())
-                .orElseThrow(() -> new EntityDoesNotExistException("Coach with id: " + riderRequest.getIdCoach() + " does not exist.", riderRequest.getIdCoach()));
+        Coach coach = coachRepository.findById(riderRequest.getCoachId())
+                .orElseThrow(() -> new EntityDoesNotExistException("Coach with id: " + riderRequest.getCoachId() + " does not exist.", riderRequest.getCoachId()));
 
         Rider rider = new Rider();
         rider.setAddress(riderRequest.getAddress());

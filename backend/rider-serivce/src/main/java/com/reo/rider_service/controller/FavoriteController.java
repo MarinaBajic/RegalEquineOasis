@@ -19,4 +19,10 @@ public class FavoriteController {
     public void add(@RequestBody @Valid FavoriteRequest favoriteRequest) {
         favoriteService.add(favoriteRequest);
     }
+
+    @DeleteMapping("/delete")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteFavoriteByIdHorse(@RequestParam("id-horse") Long id) {
+        favoriteService.deleteByHorseId(id);
+    }
 }

@@ -26,5 +26,5 @@ public class HorseRequest {
     private String nickname;
 
     @NotNull(message = "Id of breed must be provided.")
-    private Long idBreed;
+    private Long breedId;
 }

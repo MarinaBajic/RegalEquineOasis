@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FavoriteRequest {
     @NotNull(message = "Id of rider must be provided.")
-    private Long idRider;
+    private Long riderId;
 
     @NotNull(message = "Id of horse must be provided.")
-    private Long idHorse;
+    private Long horseId;
 }

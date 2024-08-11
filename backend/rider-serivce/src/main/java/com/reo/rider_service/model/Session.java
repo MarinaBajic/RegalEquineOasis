@@ -18,9 +18,7 @@ public class Session {
     @ManyToOne
     private Rider rider;
 
-    @Column(name = "horse_id")
-    private Long idHorse;
-
+    private Long horseId;
     private LocalDate date;
     private String time;
     private String description;

@@ -23,5 +23,5 @@ public class RiderRequest {
     private LocalDate dateOfEnrollment;
 
     @NotNull(message = "Id of coach must be provided.")
-    private Long idCoach;
+    private Long coachId;
 }

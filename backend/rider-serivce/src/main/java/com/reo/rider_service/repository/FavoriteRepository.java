@@ -7,5 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
-    Optional<Favorite> findByIdHorseAndRider(Long idHorse, Rider rider);
+    Optional<Favorite> findByHorseIdAndRider(Long idHorse, Rider rider);
+
+    void deleteByHorseId(Long id);
 }

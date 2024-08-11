@@ -21,10 +21,10 @@ public class SessionRequest {
     private String time;
 
     @NotNull(message = "Id of rider must be provided.")
-    private Long idRider;
+    private Long riderId;
 
     @NotNull(message = "Id of horse must be provided.")
-    private Long idHorse;
+    private Long horseId;
 
     private String description;
 }

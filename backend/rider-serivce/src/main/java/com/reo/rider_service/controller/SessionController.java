@@ -43,7 +43,7 @@ public class SessionController {
 
     @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteByIdHorse(@RequestParam("id-horse") Long id) {
-        sessionService.deleteByIdHorse(id);
+    public void deleteSessionByIdHorse(@RequestParam("id-horse") Long id) {
+        sessionService.deleteByHorseId(id);
     }
 }

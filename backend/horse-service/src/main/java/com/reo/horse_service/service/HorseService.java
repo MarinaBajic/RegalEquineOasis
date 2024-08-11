@@ -4,7 +4,7 @@ import com.reo.horse_service.dto.HorseRequest;
 import com.reo.horse_service.dto.HorseResponse;
 import com.reo.horse_service.exception.EntityAlreadyExistsException;
 import com.reo.horse_service.exception.EntityDoesNotExistException;
-import com.reo.horse_service.feign.SessionClient;
+import com.reo.horse_service.feign.RiderManagementClient;
 import com.reo.horse_service.mapper.HorseMapper;
 import com.reo.horse_service.model.Breed;
 import com.reo.horse_service.model.Horse;
@@ -25,7 +25,7 @@ public class HorseService {
 
     private HorseRepository horseRepository;
     private BreedRepository breedRepository;
-    private SessionClient sessionClient;
+    private RiderManagementClient riderManagementClient;
     private HorseMapper horseMapper;
 
     public List<HorseResponse> getAll() {
@@ -45,8 +45,8 @@ public class HorseService {
             throw new EntityAlreadyExistsException("Horse with full name: '" + horseRequest.getFullName() + "' already exists in the DB.", horseOptional.get().getId());
         }
 
-        Breed breed = breedRepository.findById(horseRequest.getIdBreed())
-                .orElseThrow(() -> new EntityDoesNotExistException("Breed with id: " + horseRequest.getIdBreed() + " does not exist.", horseRequest.getIdBreed()));
+        Breed breed = breedRepository.findById(horseRequest.getBreedId())
+                .orElseThrow(() -> new EntityDoesNotExistException("Breed with id: " + horseRequest.getBreedId() + " does not exist.", horseRequest.getBreedId()));
 
         Horse horse = new Horse();
         horse.setDateOfBirth(horseRequest.getDateOfBirth());
@@ -64,7 +64,8 @@ public class HorseService {
         Horse horse = horseRepository.findById(id)
                 .orElseThrow(() -> new EntityDoesNotExistException("Horse with id: '" + id + "' does not exist in the DB.", id));
 
-        sessionClient.deleteByIdHorse(horse.getId());
+        riderManagementClient.deleteFavoriteByIdHorse(horse.getId());
+        riderManagementClient.deleteSessionByIdHorse(horse.getId());
         horseRepository.delete(horse);
         log.info("Horse with id: {} successfully deleted.", id);
     }

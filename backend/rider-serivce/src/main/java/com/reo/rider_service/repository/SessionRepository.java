@@ -8,8 +8,8 @@ import java.util.Optional;
 
 public interface SessionRepository extends JpaRepository<Session, Long> {
 
-    void deleteByIdHorse(Long id);
+    void deleteByHorseId(Long id);
 
-    Optional<Session> findByIdHorseAndDateAndTime(Long id, LocalDate date, String time);
+    Optional<Session> findByHorseIdAndDateAndTime(Long id, LocalDate date, String time);
 
 }

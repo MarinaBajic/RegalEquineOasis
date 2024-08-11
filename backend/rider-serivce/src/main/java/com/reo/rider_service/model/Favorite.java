@@ -16,5 +16,5 @@ public class Favorite {
     @ManyToOne
     private Rider rider;
 
-    private Long idHorse;
+    private Long horseId;
 }

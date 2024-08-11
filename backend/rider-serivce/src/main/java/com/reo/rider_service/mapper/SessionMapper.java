@@ -17,7 +17,7 @@ public class SessionMapper {
     private RiderMapper riderMapper;
 
     public SessionResponse mapToResponse(Session session) {
-        HorseResponse horse = horseClient.getById(session.getIdHorse()).getBody();
+        HorseResponse horse = horseClient.getById(session.getHorseId()).getBody();
 
         return SessionResponse.builder()
                 .id(session.getId())

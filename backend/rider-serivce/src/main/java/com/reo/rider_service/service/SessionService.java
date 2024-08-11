@@ -39,16 +39,16 @@ public class SessionService {
     }
 
     public void add(SessionRequest sessionRequest) {
-        Rider rider = riderRepository.findById(sessionRequest.getIdRider()).orElseThrow(() -> new EntityDoesNotExistException("Rider with id: " + sessionRequest.getIdRider() + " does not exist.", sessionRequest.getIdRider()));
+        Rider rider = riderRepository.findById(sessionRequest.getRiderId()).orElseThrow(() -> new EntityDoesNotExistException("Rider with id: " + sessionRequest.getRiderId() + " does not exist.", sessionRequest.getRiderId()));
 
         HorseResponse horse;
         try {
-            horse = horseClient.getById(sessionRequest.getIdHorse()).getBody();
+            horse = horseClient.getById(sessionRequest.getHorseId()).getBody();
         } catch (FeignException e) {
-            throw new EntityDoesNotExistException("Horse with id: " + sessionRequest.getIdHorse() + " does not exist.", sessionRequest.getIdHorse());
+            throw new EntityDoesNotExistException("Horse with id: " + sessionRequest.getHorseId() + " does not exist.", sessionRequest.getHorseId());
         }
 
-        Optional<Session> horseTaken = sessionRepository.findByIdHorseAndDateAndTime(horse != null ? horse.getId() : null, sessionRequest.getDate(), sessionRequest.getTime());
+        Optional<Session> horseTaken = sessionRepository.findByHorseIdAndDateAndTime(horse != null ? horse.getId() : null, sessionRequest.getDate(), sessionRequest.getTime());
         if (horseTaken.isPresent())
             throw new UnableToAddNewEntityException("Horse with id: " + (horse != null ? horse.getId() : null) + " is not available for selected date and time. Please choose another.");
 
@@ -57,14 +57,14 @@ public class SessionService {
         session.setTime(sessionRequest.getTime());
         session.setDescription(sessionRequest.getDescription());
         session.setRider(rider);
-        session.setIdHorse(horse != null ? horse.getId() : null);
+        session.setHorseId(horse != null ? horse.getId() : null);
 
         sessionRepository.save(session);
         log.info("Session with id: {} is saved", session.getId());
     }
 
     @Transactional
-    public void deleteByIdHorse(Long id) {
-        sessionRepository.deleteByIdHorse(id);
+    public void deleteByHorseId(Long id) {
+        sessionRepository.deleteByHorseId(id);
     }
 }
