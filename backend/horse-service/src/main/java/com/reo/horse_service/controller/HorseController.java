@@ -51,7 +51,7 @@ public class HorseController {
 
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.OK)
-    public List<HorseResponse> findAllByBreed(@RequestParam("id-breed") Long id) {
-        return horseService.findAllByBreed(id);
+    public List<HorseResponse> getAllByBreed(@RequestParam("id-breed") Long id) {
+        return horseService.getAllByBreed(id);
     }
 }

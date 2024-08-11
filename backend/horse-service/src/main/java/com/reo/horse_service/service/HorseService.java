@@ -71,7 +71,7 @@ public class HorseService {
         log.info("Horse with id: {} successfully deleted.", id);
     }
 
-    public List<HorseResponse> findAllByBreed(Long id) {
+    public List<HorseResponse> getAllByBreed(Long id) {
         Breed breed = breedRepository.findById(id)
                 .orElseThrow(() -> new EntityDoesNotExistException("Breed with id: '" + id + "' does not exist.", id));
 
