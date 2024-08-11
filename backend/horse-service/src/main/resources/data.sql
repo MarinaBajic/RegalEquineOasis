@@ -3,6 +3,7 @@ INSERT INTO Breed (name, coat_color) VALUES
 ('Thoroughbred', 'Bay'),
 ('Arabian', 'Chestnut'),
 ('Quarter Horse', 'Sorrel');
+
 -- Populate Horse table
 INSERT INTO Horse (full_name, nickname, gender, date_of_birth, breed_id) VALUES
 ('Champion Stallion', 'Champ', 'M', '2015-04-20', 1),
