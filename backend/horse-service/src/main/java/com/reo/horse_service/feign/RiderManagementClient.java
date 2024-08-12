@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface RiderManagementClient {
 
     @DeleteMapping("/api/sessions/delete")
-    void deleteSessionByIdHorse(@RequestParam("id-horse") Long idHorse);
+    void deleteSessionByHorseId(@RequestParam("id-horse") Long idHorse);
 
     @DeleteMapping("/api/favorites/delete")
-    void deleteFavoriteByIdHorse(@RequestParam("id-horse") Long idHorse);
+    void deleteFavoriteByHorseId(@RequestParam("id-horse") Long idHorse);
 }

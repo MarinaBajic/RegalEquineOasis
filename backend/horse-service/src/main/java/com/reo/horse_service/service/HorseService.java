@@ -4,7 +4,6 @@ import com.reo.horse_service.dto.HorseRequest;
 import com.reo.horse_service.dto.HorseResponse;
 import com.reo.horse_service.exception.EntityAlreadyExistsException;
 import com.reo.horse_service.exception.EntityDoesNotExistException;
-import com.reo.horse_service.feign.RiderManagementClient;
 import com.reo.horse_service.mapper.HorseMapper;
 import com.reo.horse_service.model.Breed;
 import com.reo.horse_service.model.Horse;
@@ -23,7 +22,7 @@ import java.util.Optional;
 public class HorseService {
 
     private HorseRepository horseRepository;
-    private RiderManagementClient riderManagementClient;
+    private RiderService riderService;
     private BreedService breedService;
     private HorseMapper horseMapper;
 
@@ -33,9 +32,12 @@ public class HorseService {
     }
 
     public HorseResponse getById(Long id) {
-        Horse horse = horseRepository.findById(id)
+        return horseMapper.mapToResponse(getEntityById(id));
+    }
+
+    public Horse getEntityById(Long id) {
+        return horseRepository.findById(id)
                 .orElseThrow(() -> new EntityDoesNotExistException("Horse with id: " + id + " not found.", id));
-        return horseMapper.mapToResponse(horse);
     }
 
     public void add(HorseRequest horseRequest) {
@@ -59,11 +61,8 @@ public class HorseService {
 
     @Transactional
     public void delete(Long id) {
-        Horse horse = horseRepository.findById(id)
-                .orElseThrow(() -> new EntityDoesNotExistException("Horse with id: '" + id + "' does not exist in the DB.", id));
-
-        riderManagementClient.deleteFavoriteByIdHorse(horse.getId());
-        riderManagementClient.deleteSessionByIdHorse(horse.getId());
+        Horse horse = getEntityById(id);
+        riderService.deleteCascadeHorseInfo(horse.getId());
         horseRepository.delete(horse);
         log.info("Horse with id: {} successfully deleted.", id);
     }
