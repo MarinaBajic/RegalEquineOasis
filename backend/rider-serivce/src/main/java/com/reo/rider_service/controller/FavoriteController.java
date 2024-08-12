@@ -1,11 +1,14 @@
 package com.reo.rider_service.controller;
 
 import com.reo.rider_service.dto.FavoriteRequest;
+import com.reo.rider_service.dto.HorseResponse;
 import com.reo.rider_service.service.FavoriteService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -18,6 +21,12 @@ public class FavoriteController {
     @ResponseStatus(HttpStatus.CREATED)
     public void add(@RequestBody @Valid FavoriteRequest favoriteRequest) {
         favoriteService.add(favoriteRequest);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<HorseResponse> getAllFavoriteHorsesForRider(@RequestParam("id-rider") Long idRider) {
+        return favoriteService.getAllFavoriteHorsesForRider(idRider);
     }
 
     @DeleteMapping("/delete")

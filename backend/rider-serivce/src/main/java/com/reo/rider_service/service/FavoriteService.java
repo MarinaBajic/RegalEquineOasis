@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -47,6 +48,14 @@ public class FavoriteService {
 
         favoriteRepository.save(favorite);
         log.info("Favorite horse with id: {} is saved.", favorite.getId());
+    }
+
+    public List<HorseResponse> getAllFavoriteHorsesForRider(Long idRider) {
+        Rider rider = riderRepository.findById(idRider)
+                .orElseThrow(() -> new EntityDoesNotExistException("Rider with id: " + idRider + " does not exist in the DB.", idRider));
+
+        List<Favorite> favorites = favoriteRepository.findAllByRider(rider);
+        return favorites.stream().map((favorite -> horseClient.getById(favorite.getHorseId()).getBody())).toList();
     }
 
     @Transactional
