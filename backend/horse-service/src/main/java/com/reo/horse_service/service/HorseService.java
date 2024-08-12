@@ -61,9 +61,11 @@ public class HorseService {
 
     @Transactional
     public void delete(Long id) {
-        Horse horse = getEntityById(id);
-        riderService.deleteCascadeHorseInfo(horse.getId());
-        horseRepository.delete(horse);
+        if (!entityExists(id)) {
+            return;
+        }
+        riderService.deleteCascadeHorseInfo(id);
+        horseRepository.deleteById(id);
         log.info("Horse with id: {} successfully deleted.", id);
     }
 
@@ -71,5 +73,9 @@ public class HorseService {
         Breed breed = breedService.getEntityById(id);
         List<Horse> horses = horseRepository.findAllByBreed(breed);
         return horseMapper.mapToResponseList(horses);
+    }
+
+    public boolean entityExists(Long id) {
+        return getEntityById(id) != null;
     }
 }

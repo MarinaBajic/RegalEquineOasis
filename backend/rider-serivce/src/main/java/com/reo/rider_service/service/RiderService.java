@@ -28,9 +28,7 @@ public class RiderService {
     }
 
     public RiderResponse getById(Long id) {
-        Rider rider = riderRepository.findById(id)
-                .orElseThrow(() -> new EntityDoesNotExistException("Rider with id: " + id + " not found.", id));
-        return riderMapper.mapToResponse(rider);
+        return riderMapper.mapToResponse(getEntityById(id));
     }
 
     public Rider getEntityById(Long id) {
