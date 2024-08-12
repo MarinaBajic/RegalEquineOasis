@@ -2,6 +2,7 @@ package com.reo.rider_service.service;
 
 import com.reo.rider_service.dto.FavoriteRequest;
 import com.reo.rider_service.dto.HorseResponse;
+import com.reo.rider_service.exception.EntityDoesNotExistException;
 import com.reo.rider_service.exception.UnableToAddNewEntityException;
 import com.reo.rider_service.model.Favorite;
 import com.reo.rider_service.model.Rider;
@@ -43,6 +44,14 @@ public class FavoriteService {
         Rider rider = riderService.getEntityById(idRider);
         List<Favorite> favorites = favoriteRepository.findAllByRider(rider);
         return favorites.stream().map((favorite -> horseService.getById(favorite.getHorseId()))).toList();
+    }
+
+    public void delete(Long idRider, Long idHorse) {
+        Rider rider = riderService.getEntityById(idRider);
+        Favorite favorite = favoriteRepository.findByHorseIdAndRider(idHorse, rider)
+                .orElseThrow(() -> new EntityDoesNotExistException("Favorite horse with id: " + idHorse + " for rider with id: " + idRider + " does not exist in the DB.", -1L));
+
+        favoriteRepository.delete(favorite);
     }
 
     @Transactional
