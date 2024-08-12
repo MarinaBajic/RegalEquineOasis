@@ -8,7 +8,6 @@ import com.reo.horse_service.feign.RiderManagementClient;
 import com.reo.horse_service.mapper.HorseMapper;
 import com.reo.horse_service.model.Breed;
 import com.reo.horse_service.model.Horse;
-import com.reo.horse_service.repository.BreedRepository;
 import com.reo.horse_service.repository.HorseRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -24,8 +23,8 @@ import java.util.Optional;
 public class HorseService {
 
     private HorseRepository horseRepository;
-    private BreedRepository breedRepository;
     private RiderManagementClient riderManagementClient;
+    private BreedService breedService;
     private HorseMapper horseMapper;
 
     public List<HorseResponse> getAll() {
@@ -45,8 +44,7 @@ public class HorseService {
             throw new EntityAlreadyExistsException("Horse with full name: '" + horseRequest.getFullName() + "' already exists in the DB.", horseOptional.get().getId());
         }
 
-        Breed breed = breedRepository.findById(horseRequest.getBreedId())
-                .orElseThrow(() -> new EntityDoesNotExistException("Breed with id: " + horseRequest.getBreedId() + " does not exist.", horseRequest.getBreedId()));
+        Breed breed = breedService.getEntityById(horseRequest.getBreedId());
 
         Horse horse = new Horse();
         horse.setDateOfBirth(horseRequest.getDateOfBirth());
@@ -71,9 +69,7 @@ public class HorseService {
     }
 
     public List<HorseResponse> getAllByBreed(Long id) {
-        Breed breed = breedRepository.findById(id)
-                .orElseThrow(() -> new EntityDoesNotExistException("Breed with id: '" + id + "' does not exist.", id));
-
+        Breed breed = breedService.getEntityById(id);
         List<Horse> horses = horseRepository.findAllByBreed(breed);
         return horseMapper.mapToResponseList(horses);
     }

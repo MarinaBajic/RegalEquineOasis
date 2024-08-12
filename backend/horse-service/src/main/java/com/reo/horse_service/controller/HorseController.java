@@ -23,14 +23,14 @@ public class HorseController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<HorseResponse> getAll() {
+    public List<HorseResponse> getAllHorses() {
         return horseService.getAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<HorseResponse> getById(@PathVariable Long id) {
+    public ResponseEntity<HorseResponse> getHorseById(@PathVariable Long idHorse) {
         try {
-            HorseResponse horseResponse = horseService.getById(id);
+            HorseResponse horseResponse = horseService.getById(idHorse);
             return ResponseEntity.ok(horseResponse);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -39,19 +39,19 @@ public class HorseController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(@RequestBody @Valid HorseRequest horseRequest) {
+    public void addHorse(@RequestBody @Valid HorseRequest horseRequest) {
         horseService.add(horseRequest);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@RequestParam("id-horse") Long id) {
-        horseService.delete(id);
+    public void deleteHorse(@RequestParam("id-horse") Long idHorse) {
+        horseService.delete(idHorse);
     }
 
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.OK)
-    public List<HorseResponse> getAllByBreed(@RequestParam("id-breed") Long id) {
-        return horseService.getAllByBreed(id);
+    public List<HorseResponse> getAllHorsesByBreed(@RequestParam("id-breed") Long idBreed) {
+        return horseService.getAllByBreed(idBreed);
     }
 }
