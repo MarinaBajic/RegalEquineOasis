@@ -3,13 +3,10 @@ package com.reo.rider_service.service;
 import com.reo.rider_service.dto.*;
 import com.reo.rider_service.exception.EntityDoesNotExistException;
 import com.reo.rider_service.exception.UnableToAddNewEntityException;
-import com.reo.rider_service.feign.HorseClient;
 import com.reo.rider_service.mapper.SessionMapper;
 import com.reo.rider_service.model.Rider;
 import com.reo.rider_service.model.Session;
-import com.reo.rider_service.repository.RiderRepository;
 import com.reo.rider_service.repository.SessionRepository;
-import feign.FeignException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,8 +21,8 @@ import java.util.Optional;
 public class SessionService {
 
     private SessionRepository sessionRepository;
-    private RiderRepository riderRepository;
-    private HorseClient horseClient;
+    private RiderService riderService;
+    private HorseService horseService;
     private SessionMapper sessionMapper;
 
     public List<SessionResponse> getAll() {
@@ -39,14 +36,8 @@ public class SessionService {
     }
 
     public void add(SessionRequest sessionRequest) {
-        Rider rider = riderRepository.findById(sessionRequest.getRiderId()).orElseThrow(() -> new EntityDoesNotExistException("Rider with id: " + sessionRequest.getRiderId() + " does not exist.", sessionRequest.getRiderId()));
-
-        HorseResponse horse;
-        try {
-            horse = horseClient.getById(sessionRequest.getHorseId()).getBody();
-        } catch (FeignException e) {
-            throw new EntityDoesNotExistException("Horse with id: " + sessionRequest.getHorseId() + " does not exist.", sessionRequest.getHorseId());
-        }
+        Rider rider = riderService.getEntityById(sessionRequest.getRiderId());
+        HorseResponse horse = horseService.getById(sessionRequest.getHorseId());
 
         Optional<Session> horseTaken = sessionRepository.findByHorseIdAndDateAndTime(horse != null ? horse.getId() : null, sessionRequest.getDate(), sessionRequest.getTime());
         if (horseTaken.isPresent())
@@ -64,7 +55,7 @@ public class SessionService {
     }
 
     @Transactional
-    public void deleteByHorseId(Long id) {
-        sessionRepository.deleteByHorseId(id);
+    public void deleteByHorseId(Long idHorse) {
+        sessionRepository.deleteByHorseId(idHorse);
     }
 }

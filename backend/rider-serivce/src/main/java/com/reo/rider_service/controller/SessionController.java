@@ -21,14 +21,14 @@ public class SessionController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<SessionResponse> getAll() {
+    public List<SessionResponse> getAllSessions() {
         return sessionService.getAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SessionResponse> getById(@PathVariable Long id) {
+    public ResponseEntity<SessionResponse> getSessionById(@PathVariable Long idSession) {
         try {
-            SessionResponse sessionResponse = sessionService.getById(id);
+            SessionResponse sessionResponse = sessionService.getById(idSession);
             return ResponseEntity.ok(sessionResponse);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -37,13 +37,13 @@ public class SessionController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(@RequestBody @Valid SessionRequest sessionRequest) {
+    public void addSession(@RequestBody @Valid SessionRequest sessionRequest) {
         sessionService.add(sessionRequest);
     }
 
     @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteSessionByIdHorse(@RequestParam("id-horse") Long id) {
-        sessionService.deleteByHorseId(id);
+    public void deleteSessionByIdHorse(@RequestParam("id-horse") Long idHorse) {
+        sessionService.deleteByHorseId(idHorse);
     }
 }

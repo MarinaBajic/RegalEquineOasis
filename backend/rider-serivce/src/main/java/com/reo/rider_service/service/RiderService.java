@@ -6,7 +6,6 @@ import com.reo.rider_service.exception.EntityDoesNotExistException;
 import com.reo.rider_service.mapper.RiderMapper;
 import com.reo.rider_service.model.Coach;
 import com.reo.rider_service.model.Rider;
-import com.reo.rider_service.repository.CoachRepository;
 import com.reo.rider_service.repository.RiderRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +19,7 @@ import java.util.List;
 public class RiderService {
 
     private RiderRepository riderRepository;
-    private CoachRepository coachRepository;
+    private CoachService coachService;
     private RiderMapper riderMapper;
 
     public List<RiderResponse> getAll() {
@@ -34,9 +33,13 @@ public class RiderService {
         return riderMapper.mapToResponse(rider);
     }
 
+    public Rider getEntityById(Long id) {
+        return riderRepository.findById(id)
+                .orElseThrow(() -> new EntityDoesNotExistException("Rider with id: " + id + " not found.", id));
+    }
+
     public void add(RiderRequest riderRequest) {
-        Coach coach = coachRepository.findById(riderRequest.getCoachId())
-                .orElseThrow(() -> new EntityDoesNotExistException("Coach with id: " + riderRequest.getCoachId() + " does not exist.", riderRequest.getCoachId()));
+        Coach coach = coachService.getEntityById(riderRequest.getCoachId());
 
         Rider rider = new Rider();
         rider.setAddress(riderRequest.getAddress());

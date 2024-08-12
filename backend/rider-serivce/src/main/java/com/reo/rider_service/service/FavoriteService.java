@@ -2,14 +2,10 @@ package com.reo.rider_service.service;
 
 import com.reo.rider_service.dto.FavoriteRequest;
 import com.reo.rider_service.dto.HorseResponse;
-import com.reo.rider_service.exception.EntityDoesNotExistException;
 import com.reo.rider_service.exception.UnableToAddNewEntityException;
-import com.reo.rider_service.feign.HorseClient;
 import com.reo.rider_service.model.Favorite;
 import com.reo.rider_service.model.Rider;
 import com.reo.rider_service.repository.FavoriteRepository;
-import com.reo.rider_service.repository.RiderRepository;
-import feign.FeignException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,22 +20,15 @@ import java.util.Optional;
 public class FavoriteService {
 
     private FavoriteRepository favoriteRepository;
-    private RiderRepository riderRepository;
-    private HorseClient horseClient;
+    private RiderService riderService;
+    private HorseService horseService;
 
     public void add(FavoriteRequest favoriteRequest) {
-        HorseResponse horse;
-        try {
-            horse = horseClient.getById(favoriteRequest.getHorseId()).getBody();
-        } catch (FeignException e) {
-            throw new EntityDoesNotExistException("Horse with id: " + favoriteRequest.getHorseId() + " does not exist.", favoriteRequest.getHorseId());
-        }
+        HorseResponse horse = horseService.getById(favoriteRequest.getHorseId());
+        Rider rider = riderService.getEntityById(favoriteRequest.getRiderId());
 
-        Rider rider = riderRepository.findById(favoriteRequest.getRiderId())
-                .orElseThrow(() -> new EntityDoesNotExistException("Rider with id: " + favoriteRequest.getRiderId() + " does not exist in the DB.", favoriteRequest.getRiderId()));
-
-        Optional<Favorite> alreadyIsFavorite = favoriteRepository.findByHorseIdAndRider(horse != null ? horse.getId() : null, rider);
-        if (alreadyIsFavorite.isPresent())
+        Optional<Favorite> favoriteExists = favoriteRepository.findByHorseIdAndRider(horse != null ? horse.getId() : null, rider);
+        if (favoriteExists.isPresent())
             throw new UnableToAddNewEntityException("Horse with id: " + (horse != null ? horse.getId() : null) + " is already favorite for rider with id: " + rider.getId());
 
         Favorite favorite = new Favorite();
@@ -51,15 +40,13 @@ public class FavoriteService {
     }
 
     public List<HorseResponse> getAllFavoriteHorsesForRider(Long idRider) {
-        Rider rider = riderRepository.findById(idRider)
-                .orElseThrow(() -> new EntityDoesNotExistException("Rider with id: " + idRider + " does not exist in the DB.", idRider));
-
+        Rider rider = riderService.getEntityById(idRider);
         List<Favorite> favorites = favoriteRepository.findAllByRider(rider);
-        return favorites.stream().map((favorite -> horseClient.getById(favorite.getHorseId()).getBody())).toList();
+        return favorites.stream().map((favorite -> horseService.getById(favorite.getHorseId()))).toList();
     }
 
     @Transactional
-    public void deleteByHorseId(Long id) {
-        favoriteRepository.deleteByHorseId(id);
+    public void deleteByHorseId(Long idHorse) {
+        favoriteRepository.deleteByHorseId(idHorse);
     }
 }

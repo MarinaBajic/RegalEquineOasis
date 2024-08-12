@@ -23,14 +23,14 @@ public class RiderController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<RiderResponse> getAll() {
+    public List<RiderResponse> getAllRiders() {
         return riderService.getAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RiderResponse> getById(@PathVariable Long id) {
+    public ResponseEntity<RiderResponse> getRiderById(@PathVariable Long idRider) {
         try {
-            RiderResponse riderResponse = riderService.getById(id);
+            RiderResponse riderResponse = riderService.getById(idRider);
             return ResponseEntity.ok(riderResponse);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -39,7 +39,7 @@ public class RiderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(@RequestBody @Valid RiderRequest riderRequest) {
+    public void addRider(@RequestBody @Valid RiderRequest riderRequest) {
         riderService.add(riderRequest);
     }
 }

@@ -2,7 +2,7 @@ package com.reo.rider_service.mapper;
 
 import com.reo.rider_service.dto.HorseResponse;
 import com.reo.rider_service.dto.SessionResponse;
-import com.reo.rider_service.feign.HorseClient;
+import com.reo.rider_service.feign.HorseManagementClient;
 import com.reo.rider_service.model.Session;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,11 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 public class SessionMapper {
 
-    private HorseClient horseClient;
+    private HorseManagementClient horseClient;
     private RiderMapper riderMapper;
 
     public SessionResponse mapToResponse(Session session) {
-        HorseResponse horse = horseClient.getById(session.getHorseId()).getBody();
+        HorseResponse horse = horseClient.getHorseById(session.getHorseId()).getBody();
 
         return SessionResponse.builder()
                 .id(session.getId())

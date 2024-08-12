@@ -12,5 +12,5 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
 
     List<Favorite> findAllByRider(Rider rider);
 
-    void deleteByHorseId(Long id);
+    void deleteByHorseId(Long idHorse);
 }

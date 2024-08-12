@@ -19,7 +19,7 @@ public class FavoriteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(@RequestBody @Valid FavoriteRequest favoriteRequest) {
+    public void addFavorite(@RequestBody @Valid FavoriteRequest favoriteRequest) {
         favoriteService.add(favoriteRequest);
     }
 
@@ -31,7 +31,7 @@ public class FavoriteController {
 
     @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteFavoriteByIdHorse(@RequestParam("id-horse") Long id) {
-        favoriteService.deleteByHorseId(id);
+    public void deleteFavoriteByIdHorse(@RequestParam("id-horse") Long idHorse) {
+        favoriteService.deleteByHorseId(idHorse);
     }
 }
