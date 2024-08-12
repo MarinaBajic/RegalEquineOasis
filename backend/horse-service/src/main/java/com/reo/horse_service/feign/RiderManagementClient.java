@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "rider-service", url = "http://localhost:8081")
 public interface RiderManagementClient {
 
-    @DeleteMapping("/api/sessions/delete")
+    @DeleteMapping("/api/sessions")
     void deleteSessionByHorseId(@RequestParam("id-horse") Long idHorse);
 
-    @DeleteMapping("/api/favorites/delete")
+    @DeleteMapping("/api/favorites")
     void deleteFavoriteByHorseId(@RequestParam("id-horse") Long idHorse);
 }

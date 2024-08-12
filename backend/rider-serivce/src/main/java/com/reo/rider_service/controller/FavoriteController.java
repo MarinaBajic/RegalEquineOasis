@@ -29,7 +29,7 @@ public class FavoriteController {
         return favoriteService.getAllFavoriteHorsesForRider(idRider);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
     public void deleteFavoriteByHorseId(@RequestParam("id-horse") Long idHorse) {
         favoriteService.deleteByHorseId(idHorse);
