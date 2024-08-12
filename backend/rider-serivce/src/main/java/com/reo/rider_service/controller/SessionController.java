@@ -25,7 +25,7 @@ public class SessionController {
         return sessionService.getAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{idSession}")
     public ResponseEntity<SessionResponse> getSessionById(@PathVariable Long idSession) {
         try {
             SessionResponse sessionResponse = sessionService.getById(idSession);

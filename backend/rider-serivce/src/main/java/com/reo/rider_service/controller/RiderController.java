@@ -27,7 +27,7 @@ public class RiderController {
         return riderService.getAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{idRider}")
     public ResponseEntity<RiderResponse> getRiderById(@PathVariable Long idRider) {
         try {
             RiderResponse riderResponse = riderService.getById(idRider);

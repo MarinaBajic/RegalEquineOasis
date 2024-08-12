@@ -27,7 +27,7 @@ public class HorseController {
         return horseService.getAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{idHorse}")
     public ResponseEntity<HorseResponse> getHorseById(@PathVariable Long idHorse) {
         try {
             HorseResponse horseResponse = horseService.getById(idHorse);
