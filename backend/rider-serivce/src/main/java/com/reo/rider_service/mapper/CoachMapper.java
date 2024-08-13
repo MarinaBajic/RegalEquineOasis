@@ -9,6 +9,7 @@ public class CoachMapper {
 
     public CoachResponse mapToResponse(Coach coach) {
         return CoachResponse.builder()
+                .id(coach.getId())
                 .name(coach.getName())
                 .surname(coach.getSurname())
                 .yearsOfExperience(coach.getYearsOfExperience())

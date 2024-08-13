@@ -9,6 +9,7 @@ public class BreedMapper {
 
     public BreedResponse mapToResponse(Breed breed) {
         return BreedResponse.builder()
+                .id(breed.getId())
                 .name(breed.getName())
                 .coatColor(breed.getCoatColor())
                 .build();

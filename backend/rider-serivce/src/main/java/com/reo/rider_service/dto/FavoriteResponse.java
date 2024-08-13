@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FavoriteResponse {
+    private Long id;
     private RiderResponse rider;
     private HorseResponse horse;
 }

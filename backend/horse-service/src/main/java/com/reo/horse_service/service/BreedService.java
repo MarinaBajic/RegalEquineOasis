@@ -14,6 +14,6 @@ public class BreedService {
 
     public Breed getEntityById(Long id) {
         return breedRepository.findById(id)
-                .orElseThrow(() -> new EntityDoesNotExistException("Breed with id: " + id + " does not exist.", id));
+                .orElseThrow(() -> new EntityDoesNotExistException("Breed with id: " + id + " not found.", id));
     }
 }
