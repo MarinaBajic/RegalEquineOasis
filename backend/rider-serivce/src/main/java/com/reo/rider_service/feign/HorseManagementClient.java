@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name="horse-service", url = "http://localhost:8080")
+@FeignClient(name="horse-service")
 public interface HorseManagementClient {
 
     @GetMapping("/api/horses/{idHorse}")

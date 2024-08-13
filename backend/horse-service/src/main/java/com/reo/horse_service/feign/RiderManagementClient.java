@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "rider-service", url = "http://localhost:8081")
+@FeignClient(name = "rider-service")
 public interface RiderManagementClient {
 
     @DeleteMapping("/api/sessions")
