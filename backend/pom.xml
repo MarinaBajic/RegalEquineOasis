@@ -17,9 +17,9 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>horse-service</module>
-		<module>rider-service</module>
 		<module>api-gateway</module>
 		<module>eureka-server</module>
+		<module>rider-service</module>
 	</modules>
 
 	<properties>
