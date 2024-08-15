@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [],
+  imports: [ButtonComponent],
   templateUrl: './hero.component.html',
-  styleUrl: './hero.component.scss'
 })
-export class HeroComponent {
-
-}
+export class HeroComponent {}
