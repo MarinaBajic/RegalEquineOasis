@@ -1,1 +1,3 @@
-<p>horses works!</p>
+<div>
+	<app-horse-card *ngFor="let horse of horses | async" [horse]="horse"></app-horse-card>
+</div>
