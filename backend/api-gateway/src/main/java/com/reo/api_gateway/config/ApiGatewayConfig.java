@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ApiGatewayConfiguration {
+public class ApiGatewayConfig {
 
     @Bean
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
