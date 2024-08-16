@@ -1,2 +1,17 @@
-<p>horse-card works!</p>
-<span>{{horse.fullName}}</span>
+<div class=" bg-dark text-light flex flex-col rounded-sm">
+	<!-- slika -->
+	<div class="aspect-[5/6] bg-accent"></div>
+	<div class="flex flex-col gap-3 p-6">
+		<div class="flex flex-col">
+			<span class="text-accent-light uppercase text-xs font-medium">{{horse.breed.name}}</span>
+			<span class="text-2xl font-semibold">{{horse.fullName}} <span
+					class="text-gray-300 text-lg font-normal">({{horse.nickname}})</span></span>
+		</div>
+
+		<div class="space-x-2">
+			<span>{{horse.gender == "F" ? "Female" : "Male"}}</span>
+			<span>|</span>
+			<span>{{horse.dateOfBirth | age}} year old</span>
+		</div>
+	</div>
+</div>
