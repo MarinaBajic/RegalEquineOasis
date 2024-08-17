@@ -1,6 +1,18 @@
+<style>
+	swiper-container::part(bullet-active) {
+		background-color: var(--color-accent);
+	}
+
+	swiper-container::part(button-prev),
+	swiper-container::part(button-next) {
+		color: var(--color-light);
+	}
+</style>
+
 <section id="horses" class="pt-12 pb-24">
 	<h2 class="text-accent-light font-semibold uppercase text-center mb-12">&#8212; Our beauties &#8212;</h2>
-	<div class="grid grid-cols-3 gap-6 justify-center">
-		<app-horse-card *ngFor="let horse of horses | async" [horse]="horse"></app-horse-card>
-	</div>
+	<swiper-container slides-per-view="3" space-between="48" navigation="true" pagination="true">
+		<swiper-slide *ngFor="let horse of horses | async"><app-horse-card
+				[horse]="horse"></app-horse-card></swiper-slide>
+	</swiper-container>
 </section>

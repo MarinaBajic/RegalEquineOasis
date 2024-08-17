@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HorseService } from '../../services/horse.service';
 import { Observable } from 'rxjs';
 import { Horse } from '../../model/Horse';
@@ -10,6 +10,7 @@ import { AsyncPipe, NgForOf } from '@angular/common';
   standalone: true,
   imports: [HorseCardComponent, AsyncPipe, NgForOf],
   templateUrl: './horses.component.html',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HorsesComponent {
   horses!: Observable<Array<Horse>>;
