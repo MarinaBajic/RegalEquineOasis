@@ -27,7 +27,7 @@ body {
     [content-end]
     minmax(var(--padding-inline), 1fr)
     [full-width-end];
-  row-gap: 2rem;
+  row-gap: 4rem;
 }
 
 .content-grid > :not(.full-width),
