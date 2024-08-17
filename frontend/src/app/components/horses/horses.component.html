@@ -1,5 +1,5 @@
-<section id="#horses">
-	<h2 class="font-semibold uppercase text-center mb-12">&#8212; Our beauties &#8212;</h2>
+<section id="#horses" class="py-12">
+	<h2 class="text-accent-light font-semibold uppercase text-center mb-12">&#8212; Our beauties &#8212;</h2>
 	<div class="grid grid-cols-3 gap-6 justify-center">
 		<app-horse-card *ngFor="let horse of horses | async" [horse]="horse"></app-horse-card>
 	</div>
