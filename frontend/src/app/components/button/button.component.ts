@@ -8,6 +8,6 @@ import { booleanAttribute, Component, Input } from '@angular/core';
   templateUrl: './button.component.html',
 })
 export class ButtonComponent {
-  @Input() text = '';
-  @Input({ transform: booleanAttribute }) isPrimary: boolean = true;
+  @Input() text: string = '';
+  @Input() hierarchy: string = '';
 }

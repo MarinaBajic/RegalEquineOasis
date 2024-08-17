@@ -1,21 +1,29 @@
 <style>
 	.primary {
 		background-color: var(--color-accent);
-	}
 
-	.primary:hover {
-		background-color: var(--color-accent-light);
+		&:hover {
+			background-color: var(--color-accent-light);
+		}
 	}
 
 	.secondary {
 		background-color: var(--color-dark);
 		color: var(--color-light);
+
+		&:hover {
+			background-color: hsl(135, 38%, 28%);
+		}
 	}
 
-	.secondary:hover {
-		background-color: hsl(135, 38%, 28%);
+	.tertiary {
+		border-radius: 0;
+		padding: .2rem;
+
+		&:hover {
+			box-shadow: 0 -1px inset;
+		}
 	}
 </style>
 
-<a href="" class="inline-block font-medium rounded-sm py-2 px-4" [ngClass]="{'primary': isPrimary,
-'secondary': !isPrimary}">{{text}}</a>
+<a href="" class="inline-block font-medium rounded-sm py-2 px-4" [ngClass]="hierarchy">{{text}}</a>
