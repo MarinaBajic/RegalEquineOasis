@@ -1,12 +1,15 @@
-<section id="#hero" class="flex items-center">
+<section id="#hero" class=" flex items-center justify-between bg-red-500">
 	<div class="space-y-6">
 		<div>
 			<h1 class="text-7xl">Get Ready<br /> to Ride</h1>
 			<p>at Regal Equine Oasis, where passion meets elegance.</p>
 		</div>
 		<div class="space-x-3">
-			<app-button text="Log in"></app-button>
-			<app-button text="Register" isPrimary="false"></app-button>
+			<app-button text="Log in" hierarchy="primary"></app-button>
+			<app-button text="Register" hierarchy="secondary"></app-button>
 		</div>
 	</div>
+	<div class="w-1/3 aspect-[3/4] bg-cover bg-right" style="background-image: url('coach.jpg');"></div>
+	<div class="w-1/5 aspect-[3/4] bg-cover" style="background-image: url('coach2.jpg');"></div>
+	<app-button text="Our trainers &rarr;" hierarchy="tertiary"></app-button>
 </section>
