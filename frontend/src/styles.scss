@@ -13,3 +13,30 @@ body {
   background-color: var(--color-light);
   color: var(--color-dark);
 }
+
+.content-grid {
+  --padding-inline: 2rem;
+  --content-max-width: 73.75rem;
+
+  display: grid;
+  grid-template-columns:
+    [full-width-start]
+    minmax(var(--padding-inline), 1fr)
+    [content-start]
+    min(100% - (var(--padding-inline) * 2), var(--content-max-width))
+    [content-end]
+    minmax(var(--padding-inline), 1fr)
+    [full-width-end];
+  row-gap: 2rem;
+}
+
+.content-grid > :not(.full-width),
+.full-width > :not(.full-width) {
+  grid-column: content;
+}
+
+.content-grid > .full-width {
+  grid-column: full-width;
+  display: grid;
+  grid-template-columns: inherit;
+}
