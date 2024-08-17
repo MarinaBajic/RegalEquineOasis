@@ -8,6 +8,7 @@ import { booleanAttribute, Component, Input } from '@angular/core';
   templateUrl: './button.component.html',
 })
 export class ButtonComponent {
+  @Input() href: string = '';
   @Input() text: string = '';
   @Input() hierarchy: string = '';
 }
