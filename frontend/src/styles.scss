@@ -9,6 +9,10 @@
   --color-accent-light: #{hsl(27, 48%, 59%)};
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--color-light);
   color: var(--color-dark);
