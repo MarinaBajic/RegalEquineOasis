@@ -6,6 +6,7 @@ import { HorsesComponent } from './components/horses/horses.component';
 import { PonyRidesComponent } from './components/pony-rides/pony-rides.component';
 import { CoachesComponent } from './components/coaches/coaches.component';
 import { AboutComponent } from './components/about/about.component';
+import { PricingComponent } from './components/pricing/pricing.component';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ import { AboutComponent } from './components/about/about.component';
     AboutComponent,
     PonyRidesComponent,
     CoachesComponent,
+    PricingComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
