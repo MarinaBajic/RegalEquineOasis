@@ -4,9 +4,12 @@ import com.reo.rider_service.dto.*;
 import com.reo.rider_service.exception.EntityDoesNotExistException;
 import com.reo.rider_service.exception.UnableToAddNewEntityException;
 import com.reo.rider_service.mapper.SessionMapper;
+import com.reo.rider_service.mapper.SessionTypeMapper;
 import com.reo.rider_service.model.Rider;
 import com.reo.rider_service.model.Session;
+import com.reo.rider_service.model.SessionType;
 import com.reo.rider_service.repository.SessionRepository;
+import com.reo.rider_service.repository.SessionTypeRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +24,13 @@ import java.util.Optional;
 public class SessionService {
 
     private SessionRepository sessionRepository;
+    private SessionTypeRepository sessionTypeRepository;
+
     private RiderService riderService;
     private HorseService horseService;
+
     private SessionMapper sessionMapper;
+    private SessionTypeMapper sessionTypeMapper;
 
     public List<SessionResponse> getAll() {
         List<Session> sessions = sessionRepository.findAll();
@@ -57,5 +64,10 @@ public class SessionService {
     @Transactional
     public void deleteByHorseId(Long idHorse) {
         sessionRepository.deleteByHorseId(idHorse);
+    }
+
+    public List<SessionTypeResponse> getAllTypes() {
+        List<SessionType> sessionTypes = sessionTypeRepository.findAll();
+        return sessionTypeMapper.mapToResponseList(sessionTypes);
     }
 }

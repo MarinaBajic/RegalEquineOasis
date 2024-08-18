@@ -1,23 +1,41 @@
 -- Populate Coach table
-INSERT INTO Coach (name, surname, years_of_experience) VALUES
+INSERT INTO coach (name, surname, years_of_experience) VALUES
 ('John', 'Doe', 15),
 ('Jane', 'Smith', 10),
 ('Robert', 'Johnson', 8);
 
 -- Populate Rider table
-INSERT INTO Rider (name, surname, address, date_of_birth, date_of_enrollment, coach_id) VALUES
+INSERT INTO rider (name, surname, address, date_of_birth, date_of_enrollment, coach_id) VALUES
 ('Emily', 'Brown', '123 Oak Street', '2000-04-15', '2021-05-01', 1),
 ('Michael', 'Davis', '456 Pine Avenue', '1995-08-22', '2020-09-15', 2),
 ('Sarah', 'Wilson', '789 Maple Drive', '2002-11-30', '2022-02-10', 3);
 
+-- Populate SessionType table
+INSERT INTO session_type (type, price, duration) VALUES
+('BEGINNER', 20.00, 30),
+('INTERMEDIATE', 35.00, 60),
+('ADVANCED', 50.00, 90);
+
 -- Populate Session table
-INSERT INTO Session (rider_id, horse_id, date, time, description) VALUES
-(1, 1, '2024-08-01', '10:00', 'Morning training'),
-(2, 2, '2024-08-03', '15:00', 'Afternoon ride'),
-(3, 3, '2024-08-05', '09:30', 'Early session');
+INSERT INTO session (rider_id, horse_id, date, time, description, session_type_id) VALUES
+(1, 1, '2024-07-06', '10:00', 'Morning training', 3),
+(2, 2, '2024-07-06', '15:00', 'Afternoon ride', 1),
+(3, 3, '2024-07-06', '09:30', 'Early session', 2),
+(1, 4, '2024-07-07', '12:00', 'Midday session', 1),
+(2, 5, '2024-07-07', '08:00', 'Morning run', 3),
+(3, 6, '2024-07-07', '13:00', 'Post-lunch session', 2),
+(1, 7, '2024-07-08', '10:30', 'Morning training', 1),
+(2, 8, '2024-07-08', '11:00', 'Intermediate ride', 2),
+(3, 9, '2024-07-08', '14:00', 'Advanced session', 3),
+(1, 10, '2024-07-09', '09:00', 'Morning warm-up', 1),
+(2, 1, '2024-07-09', '16:00', 'Late afternoon session', 3),
+(3, 2, '2024-07-09', '07:30', 'Early bird session', 2),
+(1, 3, '2024-07-10', '13:30', 'Midday ride', 2),
+(2, 4, '2024-07-10', '10:00', 'Morning routine', 1),
+(3, 5, '2024-07-10', '15:30', 'Advanced training', 3);
 
 -- Populate Favorite table
-INSERT INTO Favorite (rider_id, horse_id) VALUES
+INSERT INTO favorite (rider_id, horse_id) VALUES
 (1, 1),
 (1, 2),
 (2, 3),

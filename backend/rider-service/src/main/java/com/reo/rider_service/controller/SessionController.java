@@ -2,6 +2,7 @@ package com.reo.rider_service.controller;
 
 import com.reo.rider_service.dto.SessionRequest;
 import com.reo.rider_service.dto.SessionResponse;
+import com.reo.rider_service.dto.SessionTypeResponse;
 import com.reo.rider_service.service.SessionService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
@@ -45,5 +46,11 @@ public class SessionController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteSessionByHorseId(@RequestParam("id-horse") Long idHorse) {
         sessionService.deleteByHorseId(idHorse);
+    }
+
+    @GetMapping("/types")
+    @ResponseStatus(HttpStatus.OK)
+    public List<SessionTypeResponse> getAllSessionTypes() {
+        return sessionService.getAllTypes();
     }
 }
