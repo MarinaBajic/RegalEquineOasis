@@ -5,6 +5,7 @@ import { HeroComponent } from './components/hero/hero.component';
 import { HorsesComponent } from './components/horses/horses.component';
 import { PonyRidesComponent } from './components/pony-rides/pony-rides.component';
 import { CoachesComponent } from './components/coaches/coaches.component';
+import { AboutComponent } from './components/about/about.component';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import { CoachesComponent } from './components/coaches/coaches.component';
     HeaderComponent,
     HeroComponent,
     HorsesComponent,
+    AboutComponent,
     PonyRidesComponent,
     CoachesComponent,
   ],
