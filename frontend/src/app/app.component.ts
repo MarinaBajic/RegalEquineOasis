@@ -7,6 +7,7 @@ import { PonyRidesComponent } from './components/pony-rides/pony-rides.component
 import { CoachesComponent } from './components/coaches/coaches.component';
 import { AboutComponent } from './components/about/about.component';
 import { PricingComponent } from './components/pricing/pricing.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ import { PricingComponent } from './components/pricing/pricing.component';
     PonyRidesComponent,
     CoachesComponent,
     PricingComponent,
+    FooterComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
