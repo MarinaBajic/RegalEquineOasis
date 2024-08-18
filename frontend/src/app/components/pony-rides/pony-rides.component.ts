@@ -7,6 +7,4 @@ import { ButtonComponent } from '../button/button.component';
   imports: [ButtonComponent],
   templateUrl: './pony-rides.component.html',
 })
-export class PonyRidesComponent {
-
-}
+export class PonyRidesComponent {}
