@@ -1,1 +1,7 @@
-<p>pricing works!</p>
+<section id="pricing" class="pt-12 pb-24">
+	<h2 class="text-accent-light font-semibold uppercase text-center mb-12">&#8212; Our pricing &#8212;</h2>
+	<div class="grid grid-cols-3 gap-12 justify-center">
+		<app-pricing-card *ngFor="let sessionType of sessionTypes | async"
+			[sessionType]="sessionType"></app-pricing-card>
+	</div>
+</section>
