@@ -11,10 +11,11 @@ INSERT INTO rider (name, surname, address, date_of_birth, date_of_enrollment, co
 ('Sarah', 'Wilson', '789 Maple Drive', '2002-11-30', '2022-02-10', 3);
 
 -- Populate SessionType table
-INSERT INTO session_type (type, price, duration) VALUES
-('BEGINNER', 20.00, 30),
-('INTERMEDIATE', 35.00, 60),
-('ADVANCED', 50.00, 90);
+INSERT INTO session_type (type, price, duration, description) VALUES
+('JUMPING', 25.00, 45, 'Focuses on improving your horse\'s ability to jump over obstacles with precision and confidence. Ideal for enhancing jumping techniques and form.'),
+('DRESSAGE', 30.00, 60, 'Emphasizes the art of training horses to perform precise movements and routines. Perfect for developing control and elegance in riding.'),
+('CROSS-COUNTRY', 40.00, 75, 'Involves navigating varied terrain and natural obstacles. Great for building endurance and adaptability in both horse and rider.');
+
 
 -- Populate Session table
 INSERT INTO session (rider_id, horse_id, date, time, description, session_type_id) VALUES

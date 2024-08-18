@@ -15,6 +15,7 @@ public class SessionTypeMapper {
                 .type(sessionType.getType())
                 .duration(sessionType.getDuration())
                 .price(sessionType.getPrice())
+                .description(sessionType.getDescription())
                 .build();
     }
 

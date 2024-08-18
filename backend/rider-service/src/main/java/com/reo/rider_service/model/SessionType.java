@@ -18,6 +18,7 @@ public class SessionType {
     private String type;
     private Double price;
     private Long duration;
+    private String description;
 
     @OneToMany(mappedBy = "sessionType")
     private List<Session> sessions;

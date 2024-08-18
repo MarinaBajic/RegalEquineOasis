@@ -14,4 +14,5 @@ public class SessionTypeResponse {
     private String type;
     private Double price;
     private Long duration;
+    private String description;
 }
