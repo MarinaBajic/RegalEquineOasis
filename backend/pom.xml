@@ -20,6 +20,7 @@
 		<module>api-gateway</module>
 		<module>eureka-server</module>
 		<module>rider-service</module>
+		<module>user-service</module>
 	</modules>
 
 	<properties>

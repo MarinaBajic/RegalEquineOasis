@@ -16,6 +16,7 @@ public class ApiGatewayConfig {
                 .route(p -> p.path("/api/coaches/**").uri("lb://rider-service"))
                 .route(p -> p.path("/api/favorites/**").uri("lb://rider-service"))
                 .route(p -> p.path("/api/sessions/**").uri("lb://rider-service"))
+                .route(p -> p.path("/api/users/**").uri("lb://user-service"))
                 .build();
     }
 }
