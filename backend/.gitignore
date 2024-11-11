@@ -29,7 +29,3 @@ Thumbs.db
 # Spring Boot executable JAR/WAR
 *.jar
 *.war
-
-# Configuration files (optional)
-*.properties
-*.yml
