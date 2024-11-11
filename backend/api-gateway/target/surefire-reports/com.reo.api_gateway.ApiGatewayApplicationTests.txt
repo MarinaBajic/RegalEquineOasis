@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.reo.api_gateway.ApiGatewayApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.20 s -- in com.reo.api_gateway.ApiGatewayApplicationTests
