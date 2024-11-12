@@ -1,7 +1,7 @@
-package com.reo.user_service.service;
+package com.reo.user_service.auth.service;
 
 import com.reo.user_service.model.User;
-import com.reo.user_service.model.UserPrincipal;
+import com.reo.user_service.auth.model.UserDetailsImpl;
 import com.reo.user_service.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +21,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
-
-        return new UserPrincipal(user);
+        return new UserDetailsImpl(user);
     }
 }

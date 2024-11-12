@@ -1,34 +1,30 @@
 package com.reo.user_service.service;
 
+import com.reo.user_service.dto.UserRegister;
+import com.reo.user_service.mapper.UserMapper;
 import com.reo.user_service.model.User;
 import com.reo.user_service.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    private final JwtService jwtService;
-
-    private final AuthenticationManager authManager;
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
-
-    public User register(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
-    public String verify(User user) {
-        Authentication auth =
-                authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-
-        return auth.isAuthenticated() ? jwtService.generateToken(user.getUsername()) : "Failure";
+    public User register(UserRegister userRegister) {
+        if (userRepository.existsByUsername(userRegister.getUsername())) {
+            throw new IllegalStateException("Username already exists");
+        }
+        User user = userMapper.toEntity(userRegister);
+        return userRepository.save(user);
     }
 }
