@@ -4,11 +4,11 @@
 ## TODO
 
 ### FE
-[] Login page
-[] Register page
-[] Profile page
-[] Link all buttons
+- [] Login page
+- [] Register page
+- [] Profile page
+- [] Link all buttons
 
 ### BE
-[] Protect endpoints by roles
-[] Test roles
+- [] Protect endpoints by roles
+- [] Test roles
