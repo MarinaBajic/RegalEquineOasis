@@ -61,4 +61,8 @@ testem.log
 # Optional: Ignore any temporary files from editors (Vim, Sublime, etc.)
 *.swp
 *~
-
+/backend/api-gateway/target/
+/backend/eureka-server/target/
+/backend/horse-service/target/
+/backend/rider-service/target/
+/backend/user-service/target/
