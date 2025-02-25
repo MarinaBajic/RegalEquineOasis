@@ -6,6 +6,10 @@
 		<li class="font-medium hover:shadow-[0_-1px_inset]"><a href="/home#horses">Horses</a></li>
 		<li class="font-medium hover:shadow-[0_-1px_inset]"><a href="/home#about">About us</a></li>
 		<li class="font-medium hover:shadow-[0_-1px_inset]"><a href="/home#pricing">Pricing</a></li>
-		<li><app-button routerLink="/login" text="Log in" hierarchy="primary"></app-button></li>
+		<li *ngIf="!authService.isAuthenticated()"><app-button routerLink="/login" text="Log in"
+				hierarchy="primary"></app-button></li>
+		<li *ngIf="authService.isAuthenticated()"><app-button (click)="logout()" text="Log out"
+				hierarchy="primary"></app-button></li>
+
 	</ul>
 </nav>
