@@ -9,7 +9,6 @@ import { NgIf } from '@angular/common';
   standalone: true,
   imports: [FormsModule, NgIf],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   username!: string;

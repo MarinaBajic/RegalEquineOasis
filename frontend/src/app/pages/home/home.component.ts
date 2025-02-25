@@ -18,6 +18,5 @@ import { PricingComponent } from '../../components/pricing/pricing.component';
     PricingComponent,
   ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
 })
 export class HomeComponent {}
