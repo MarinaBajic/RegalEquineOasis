@@ -45,6 +45,5 @@ ng serve
 ```
 
 ## 📌 Roadmap
-- [ ] Improve route optimization for riding paths
 - [ ] Add real-time session availability updates
 - [ ] Implement full admin dashboard
